@@ -1,19 +1,6 @@
-import { WebsiteSchema } from "../schema/website";
+import { planWebsite } from "./planner";
 
-export const mockSchema: WebsiteSchema = {
-  id: "1",
-  name: "Foundation Blocks",
-  description: "Coaching Centre Website",
-  theme: "modern",
-
-  sections: [
-    {
-      id: "hero",
-      type: "hero",
-      props: {
-        title: "Foundation Blocks",
-        subtitle: "Building Strong Foundations",
-      },
-    },
-  ],
-};
+export const mockSchema =
+  planWebsite(
+    "Build me a modern coaching center website"
+  );
