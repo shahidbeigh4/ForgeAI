@@ -1,37 +1,43 @@
+import Hero from "@/components/generated/Hero";
+import Features from "@/components/generated/Features";
+import Contact from "@/components/generated/Contact";
+import Footer from "@/components/generated/Footer";
+
 import { ForgeDocument } from "../schema/document";
-import { pluginRegistry } from "../plugins";
 
 type Props = {
   document: ForgeDocument;
 };
 
-export default function WebsiteRenderer({
-  document,
-}: Props) {
+export default function WebsiteRenderer({ document }: Props) {
   return (
-    <div className="space-y-8">
+    <div className="space-y-16">
       {document.sections.map((section) => {
-        const plugin = pluginRegistry[section.type];
+        switch (section.type) {
+          case "hero":
+            return (
+              <Hero
+                key={section.id}
+                title={section.props.title}
+                subtitle={section.props.subtitle}
+                buttonText={section.props.buttonText}
+              />
+            );
 
-        if (!plugin) {
-          return (
-            <div
-              key={section.id}
-              className="rounded bg-red-500 p-4"
-            >
-              Unknown plugin: {section.type}
-            </div>
-          );
+          case "features":
+            return <Features key={section.id} />;
+
+          case "contact":
+            return <Contact key={section.id} />;
+
+          case "footer":
+            return <Footer key={section.id} />;
+
+          default: {
+  const _exhaustive: never = section;
+  return null;
+}
         }
-
-        const Component = plugin.Component;
-
-        return (
-          <Component
-            key={section.id}
-            {...section.props}
-          />
-        );
       })}
     </div>
   );

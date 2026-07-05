@@ -1,35 +1,31 @@
 import { BusinessType } from "./business";
+import { SectionType } from "../schema/website";
 
 export function getSections(
   business: BusinessType
-) {
+): SectionType[] {
   switch (business) {
     case "education":
-      return [
-        "hero",
-        "features",
-        "testimonials",
-        "gallery",
-        "contact",
-        "footer",
-      ];
+   return [
+  "hero",
+  "features",
+  "contact",
+  "footer",
+];
 
     case "restaurant":
-      return [
-        "hero",
-        "gallery",
-        "contact",
-        "footer",
-      ];
+     return [
+  "hero",
+  "contact",
+  "footer",
+];
 
     case "hotel":
       return [
-        "hero",
-        "gallery",
-        "testimonials",
-        "contact",
-        "footer",
-      ];
+  "hero",
+  "contact",
+  "footer",
+];
 
     default:
       return [
@@ -37,5 +33,6 @@ export function getSections(
         "contact",
         "footer",
       ];
+      
   }
 }

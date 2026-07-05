@@ -1,14 +1,14 @@
-import GeneratedHero from "@/components/generated/Hero";
+import Hero from "@/components/generated/Hero";
 import { Plugin } from "./Plugin";
 import { HeroProps } from "../schema/website";
 
 export const HeroPlugin: Plugin<HeroProps> = {
   type: "hero",
 
-  Component: GeneratedHero,
+  Component: Hero,
 
   defaultProps: {
-    title: "New Website",
+    title: "Foundation Blocks",
     subtitle: "Powered by ForgeAI",
     buttonText: "Get Started",
   },

@@ -6,11 +6,7 @@ export type ThemeType =
 
 export type SectionType =
   | "hero"
-  | "about"
   | "features"
-  | "gallery"
-  | "pricing"
-  | "testimonials"
   | "contact"
   | "footer";
 
@@ -30,19 +26,32 @@ export interface HeroSection extends BaseSection {
   props: HeroProps;
 }
 
+export interface FeaturesSection extends BaseSection {
+  type: "features";
+  props: {};
+}
+
+export interface ContactSection extends BaseSection {
+  type: "contact";
+  props: {};
+}
+
+export interface FooterSection extends BaseSection {
+  type: "footer";
+  props: {};
+}
+
 export type WebsiteSection =
-  | HeroSection;
+  | HeroSection
+  | FeaturesSection
+  | ContactSection
+  | FooterSection;
 
 export interface WebsiteSchema {
   id: string;
-
   name: string;
-
   description: string;
-
   business: string;
-
   theme: ThemeType;
-
   sections: WebsiteSection[];
 }
