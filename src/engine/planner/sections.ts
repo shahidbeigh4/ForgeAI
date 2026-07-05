@@ -6,33 +6,68 @@ export function getSections(
 ): SectionType[] {
   switch (business) {
     case "education":
-   return [
-  "hero",
-  "features",
-  "contact",
-  "footer",
-];
-
-    case "restaurant":
-     return [
-  "hero",
-  "contact",
-  "footer",
-];
-
-    case "hotel":
-      return [
-  "hero",
-  "contact",
-  "footer",
-];
-
-    default:
       return [
         "hero",
+        "features",
         "contact",
         "footer",
       ];
-      
+
+    case "restaurant":
+      return [
+        "hero",
+        "features",
+        "contact",
+        "footer",
+      ];
+
+    case "hotel":
+      return [
+        "hero",
+        "features",
+        "contact",
+        "footer",
+      ];
+
+    case "portfolio":
+      return [
+        "hero",
+        "features",
+        "contact",
+        "footer",
+      ];
+
+    case "hospital":
+      return [
+        "hero",
+        "features",
+        "contact",
+        "footer",
+      ];
+
+    case "ecommerce":
+      return [
+        "hero",
+        "features",
+        "contact",
+        "footer",
+      ];
+
+    case "agency":
+      return [
+        "hero",
+        "features",
+        "contact",
+        "footer",
+      ];
+
+    case "unknown":
+    default:
+      return [
+        "hero",
+        "features",
+        "contact",
+        "footer",
+      ];
   }
 }

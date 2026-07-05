@@ -17,7 +17,7 @@ export default function Hero({
       <div className="mx-auto max-w-5xl">
 
         <span className="rounded-full border border-blue-500/30 bg-blue-500/10 px-5 py-2 text-sm text-blue-300">
-          Trusted by 500+ Students
+          ✨ AI Generated Website
         </span>
 
         <h1 className="mt-8 text-6xl font-black leading-tight">

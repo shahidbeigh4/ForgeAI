@@ -61,5 +61,5 @@ export function detectBusiness(prompt: string): BusinessType {
     return "agency";
   }
 
-  return "unknown";
+  return "portfolio";
 }

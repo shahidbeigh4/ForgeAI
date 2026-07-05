@@ -1,3 +1,10 @@
+export type BusinessType =
+  | "education"
+  | "hotel"
+  | "restaurant"
+  | "portfolio"
+  | "startup";
+
 export type ThemeType =
   | "modern"
   | "minimal"
@@ -26,32 +33,11 @@ export interface HeroSection extends BaseSection {
   props: HeroProps;
 }
 
-export interface FeaturesSection extends BaseSection {
-  type: "features";
-  props: {};
-}
-
-export interface ContactSection extends BaseSection {
-  type: "contact";
-  props: {};
-}
-
-export interface FooterSection extends BaseSection {
-  type: "footer";
+export interface EmptySection extends BaseSection {
+  type: "features" | "contact" | "footer";
   props: {};
 }
 
 export type WebsiteSection =
   | HeroSection
-  | FeaturesSection
-  | ContactSection
-  | FooterSection;
-
-export interface WebsiteSchema {
-  id: string;
-  name: string;
-  description: string;
-  business: string;
-  theme: ThemeType;
-  sections: WebsiteSection[];
-}
+  | EmptySection;
