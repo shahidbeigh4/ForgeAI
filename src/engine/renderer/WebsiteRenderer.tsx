@@ -2,6 +2,7 @@ import Hero from "@/components/generated/Hero";
 import Features from "@/components/generated/Features";
 import Contact from "@/components/generated/Contact";
 import Footer from "@/components/generated/Footer";
+import Navbar from "@/components/generated/Navbar";
 
 import { ForgeDocument } from "../schema/document";
 
@@ -32,6 +33,15 @@ export default function WebsiteRenderer({ document }: Props) {
 
           case "footer":
             return <Footer key={section.id} />;
+            return (
+  <>
+    <Navbar />
+
+    <div className="space-y-16">
+      ...
+    </div>
+  </>
+);
 
           default: {
   const _exhaustive: never = section;
