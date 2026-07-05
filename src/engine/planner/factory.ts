@@ -1,4 +1,7 @@
-import { SectionType, WebsiteSection } from "../schema/website";
+import {
+  SectionType,
+  WebsiteSection,
+} from "../schema/website";
 
 export function createSection(
   type: SectionType
@@ -9,9 +12,9 @@ export function createSection(
         id: crypto.randomUUID(),
         type: "hero",
         props: {
-          title: "Foundation Blocks",
-          subtitle: "AI Generated Website",
-          buttonText: "Get Started",
+          title: "",
+          subtitle: "",
+          buttonText: "",
         },
       };
 
@@ -35,5 +38,7 @@ export function createSection(
         type: "footer",
         props: {},
       };
+    default:
+      throw new Error(`Unknown section: ${type}`);
   }
 }

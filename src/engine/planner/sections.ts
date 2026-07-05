@@ -13,7 +13,7 @@ export function getSections(
         "footer",
       ];
 
-    case "restaurant":
+    case "hotel":
       return [
         "hero",
         "features",
@@ -21,7 +21,7 @@ export function getSections(
         "footer",
       ];
 
-    case "hotel":
+    case "restaurant":
       return [
         "hero",
         "features",
@@ -37,31 +37,7 @@ export function getSections(
         "footer",
       ];
 
-    case "hospital":
-      return [
-        "hero",
-        "features",
-        "contact",
-        "footer",
-      ];
-
-    case "ecommerce":
-      return [
-        "hero",
-        "features",
-        "contact",
-        "footer",
-      ];
-
-    case "agency":
-      return [
-        "hero",
-        "features",
-        "contact",
-        "footer",
-      ];
-
-    case "unknown":
+    case "startup":
     default:
       return [
         "hero",

@@ -1,4 +1,4 @@
-import { normalizePrompt } from "./analyzer";
+import { analyzePrompt } from "./analyzer";
 import { detectBusiness } from "./business";
 import { detectTheme } from "./theme";
 import { getSections } from "./sections";
@@ -10,22 +10,13 @@ import { getTemplate } from "../templates";
 export function planWebsite(
   prompt: string
 ): ForgeDocument {
+  const analysis = analyzePrompt(prompt);
 
-  const clean = normalizePrompt(prompt);
+  const business = detectBusiness(analysis);
 
-  const business = detectBusiness(clean);
+  const theme = detectTheme(analysis);
 
-  detectTheme(clean);
-
- const templateBusiness =
-  business === "education" ||
-  business === "hotel" ||
-  business === "restaurant" ||
-  business === "portfolio"
-    ? business
-    : "startup";
-
-const template = getTemplate(templateBusiness);
+  const template = getTemplate(business);
 
   const sections = getSections(business).map(createSection);
 
@@ -42,10 +33,14 @@ const template = getTemplate(templateBusiness);
   }
 
   return {
-  id: crypto.randomUUID(),
-  name: template.name,
-  business: templateBusiness,
-  theme: "modern",
-  sections,
-};
+    id: crypto.randomUUID(),
+
+    name: template.name,
+
+    business,
+
+    theme,
+
+    sections,
+  };
 }

@@ -1,5 +1,16 @@
-export function detectTheme(prompt: string) {
-  const text = prompt.toLowerCase();
+import { PromptAnalysis } from "./analyzer";
+
+export type ThemeType =
+  | "modern"
+  | "minimal"
+  | "luxury"
+  | "dark";
+
+export function detectTheme(
+  analysis: PromptAnalysis
+): ThemeType {
+
+  const text = analysis.normalized;
 
   if (text.includes("luxury"))
     return "luxury";
