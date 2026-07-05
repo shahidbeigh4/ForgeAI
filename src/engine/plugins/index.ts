@@ -1,5 +1,5 @@
 import { HeroPlugin } from "./HeroPlugin";
 
-export const plugins = {
+export const pluginRegistry = {
   hero: HeroPlugin,
-};
+} as const;

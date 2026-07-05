@@ -1,34 +1,35 @@
-import { WebsiteSchema } from "../schema/website";
-import { componentRegistry } from "../registry";
+import { ForgeDocument } from "../schema/document";
+import { pluginRegistry } from "../plugins";
 
 type Props = {
-  schema: WebsiteSchema;
+  document: ForgeDocument;
 };
 
-export default function WebsiteRenderer({ schema }: Props) {
+export default function WebsiteRenderer({
+  document,
+}: Props) {
   return (
     <div className="space-y-8">
-      {schema.sections.map((section) => {
-        const Component =
-          componentRegistry[
-            section.type as keyof typeof componentRegistry
-          ];
+      {document.sections.map((section) => {
+        const plugin = pluginRegistry[section.type];
 
-        if (!Component) {
+        if (!plugin) {
           return (
             <div
               key={section.id}
-              className="rounded-lg border border-red-500 p-4"
+              className="rounded bg-red-500 p-4"
             >
-              Unknown section: {section.type}
+              Unknown plugin: {section.type}
             </div>
           );
         }
 
+        const Component = plugin.Component;
+
         return (
           <Component
             key={section.id}
-            {...(section.props as Record<string, unknown>)}
+            {...section.props}
           />
         );
       })}

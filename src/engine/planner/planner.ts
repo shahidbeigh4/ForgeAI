@@ -2,32 +2,22 @@ import { normalizePrompt } from "./analyzer";
 import { detectBusiness } from "./business";
 import { detectTheme } from "./theme";
 
-import {
-  WebsiteSchema,
-} from "../schema/website";
+import { ForgeDocument } from "../schema/document";
 
 export function planWebsite(
   prompt: string
-): WebsiteSchema {
+): ForgeDocument {
 
   const clean = normalizePrompt(prompt);
 
-  const business =
-    detectBusiness(clean);
-
-  const theme =
-    detectTheme(clean);
+  // We will use these in Sprint 3.2
+  detectBusiness(clean);
+  detectTheme(clean);
 
   return {
     id: crypto.randomUUID(),
 
-    name: "New Website",
-
-    description: clean,
-
-    business,
-
-    theme,
+    name: "Foundation Blocks",
 
     sections: [
       {
@@ -36,11 +26,11 @@ export function planWebsite(
         type: "hero",
 
         props: {
-          title: "Welcome",
+          title: "Foundation Blocks",
 
           subtitle: clean,
 
-          buttonText: "Get Started",
+          buttonText: "Enroll Now",
         },
       },
     ],
