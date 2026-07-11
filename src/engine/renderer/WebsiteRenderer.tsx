@@ -1,8 +1,8 @@
-import Navbar from "@/components/generated/Navbar";
-import Hero from "@/components/generated/Hero";
-import Features from "@/components/generated/Features";
-import Contact from "@/components/generated/Contact";
-import Footer from "@/components/generated/Footer";
+import Navbar from "@/components/sections/Navbar";
+import Hero from "@/components/sections/Hero";
+import Features from "@/components/sections/Features";
+import Contact from "@/components/sections/Contact";
+import Footer from "@/components/sections/Footer";
 
 import { ForgeDocument } from "../schema/document";
 
