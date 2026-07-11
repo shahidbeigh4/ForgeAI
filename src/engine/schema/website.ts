@@ -10,6 +10,26 @@ export interface HeroProps {
   buttonText: string;
 }
 
+export interface FeatureItem {
+  title: string;
+  description: string;
+}
+
+export interface FeaturesProps {
+  heading: string;
+  items: FeatureItem[];
+}
+
+export interface ContactProps {
+  heading: string;
+  subtitle: string;
+  buttonText: string;
+}
+
+export interface FooterProps {
+  copyright: string;
+}
+
 export interface BaseSection {
   id: string;
   type: SectionType;
@@ -20,11 +40,23 @@ export interface HeroSection extends BaseSection {
   props: HeroProps;
 }
 
-export interface GenericSection extends BaseSection {
-  type: "features" | "contact" | "footer";
-  props: Record<string, unknown>;
+export interface FeaturesSection extends BaseSection {
+  type: "features";
+  props: FeaturesProps;
+}
+
+export interface ContactSection extends BaseSection {
+  type: "contact";
+  props: ContactProps;
+}
+
+export interface FooterSection extends BaseSection {
+  type: "footer";
+  props: FooterProps;
 }
 
 export type WebsiteSection =
   | HeroSection
-  | GenericSection;
+  | FeaturesSection
+  | ContactSection
+  | FooterSection;

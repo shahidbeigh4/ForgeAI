@@ -1,28 +1,40 @@
-import OpenAI from "openai";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
+import { generateWebsite } from "@/lib/ai";
+
+export async function POST(
+  request: NextRequest
+) {
   try {
-    const client = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY!,
-    });
+    const body = await request.json();
 
-    const response = await client.responses.create({
-      model: "gpt-4.1-mini",
-      input: "Say hello from ForgeAI.",
-    });
+    const prompt = body.prompt;
 
-    return NextResponse.json({
-      reply: response.output_text,
-    });
+    if (!prompt) {
+      return NextResponse.json(
+        {
+          error: "Prompt is required.",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
+    const document = await generateWebsite(prompt);
+
+    return NextResponse.json(document);
+
   } catch (error) {
     console.error(error);
 
     return NextResponse.json(
       {
-        error: error instanceof Error ? error.message : "Unknown error",
+        error: "Website generation failed.",
       },
-      { status: 500 }
+      {
+        status: 500,
+      }
     );
   }
 }

@@ -1,54 +1,69 @@
-import Hero from "@/components/generated/Hero";
-import Features from "@/components/generated/Features";
-import Contact from "@/components/generated/Contact";
-import Footer from "@/components/generated/Footer";
 import Navbar from "@/components/generated/Navbar";
 
 import { ForgeDocument } from "../schema/document";
+import { componentRegistry } from "../registry";
 
 type Props = {
   document: ForgeDocument;
 };
 
-export default function WebsiteRenderer({ document }: Props) {
+export default function WebsiteRenderer({
+  document,
+}: Props) {
   return (
-    <div className="space-y-16">
-      {document.sections.map((section) => {
-        switch (section.type) {
-          case "hero":
-            return (
-              <Hero
-                key={section.id}
-                title={section.props.title}
-                subtitle={section.props.subtitle}
-                buttonText={section.props.buttonText}
-              />
-            );
+    <>
+      <Navbar />
 
-          case "features":
-            return <Features key={section.id} />;
+      <div className="space-y-16">
+        {document.sections.map((section) => {
+          const Component =
+            componentRegistry[section.type];
 
-          case "contact":
-            return <Contact key={section.id} />;
+          if (!Component) return null;
 
-          case "footer":
-            return <Footer key={section.id} />;
-            return (
-  <>
-    <Navbar />
+          return (
+            <Component
+              key={section.id}
+              {...section.props}
+            />
+          );
+        })}
+      </div>
+    </>
+  );
+}import Navbar from "@/components/generated/Navbar";
 
-    <div className="space-y-16">
-      ...
-    </div>
-  </>
-);
+import { ForgeDocument } from "../schema/document";
+import { componentRegistry } from "../registry";
 
-          default: {
-  const _exhaustive: never = section;
-  return null;
-}
-        }
-      })}
-    </div>
+type Props = {
+  document: ForgeDocument;
+};
+
+export default function WebsiteRenderer({
+  document,
+}: Props) {
+  return (
+    <>
+      <Navbar />
+
+      <div className="space-y-16">
+        {document.sections.map((section) => {
+          const Component =
+            componentRegistry[
+              section.type
+            ] as React.ComponentType<any>;
+
+          if (!Component) return null;
+
+          return (
+            <Component
+              key={section.id}
+              {...section.props}
+            />
+          );
+        })}
+      </div>
+    </>
   );
 }

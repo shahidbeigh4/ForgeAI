@@ -14,20 +14,17 @@ import ChatHistory, {
 import ChatComposer from "../chat/ChatComposer";
 
 import { ForgeDocument } from "@/engine/schema/document";
-import { planWebsite } from "@/engine/planner";
+
 
 export default function ForgeAI() {
   const [messages, setMessages] = useState<Message[]>([]);
-
   const [input, setInput] = useState("");
-
   const [loading, setLoading] = useState(false);
-
   const [document, setDocument] =
     useState<ForgeDocument | null>(null);
 
-  function sendMessage() {
-    if (!input.trim()) return;
+  async function sendMessage() {
+    if (!input.trim() || loading) return;
 
     const prompt = input;
 
@@ -39,31 +36,56 @@ export default function ForgeAI() {
       },
     ]);
 
+    setInput("");
     setLoading(true);
 
-    const website = planWebsite(prompt);
+    try {
+      const response = await fetch("/api/chat", {
+  method: "POST",
 
-    setDocument(website);
+  headers: {
+    "Content-Type": "application/json",
+  },
 
-    setMessages((previous) => [
-      ...previous,
-      {
-        role: "assistant",
-        content:
-          "Website generated successfully.",
-      },
-    ]);
+  body: JSON.stringify({
+    prompt,
+  }),
+});
 
-    setInput("");
+if (!response.ok) {
+  throw new Error("Generation failed.");
+}
 
-    setLoading(false);
+const website = await response.json();
+
+setDocument(website);
+
+      setMessages((previous) => [
+        ...previous,
+        {
+          role: "assistant",
+          content: "Website generated successfully.",
+        },
+      ]);
+    } catch (error) {
+      console.error(error);
+
+      setMessages((previous) => [
+        ...previous,
+        {
+          role: "assistant",
+          content:
+            "Sorry, I couldn't generate the website.",
+        },
+      ]);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
     <div className="flex h-screen bg-[#020617] text-white">
-
       <Sidebar>
-
         <Header />
 
         <ChatHistory messages={messages} />
@@ -74,15 +96,11 @@ export default function ForgeAI() {
           onSend={sendMessage}
           loading={loading}
         />
-
       </Sidebar>
 
       <Workspace>
-
         <Preview document={document} />
-
       </Workspace>
-
     </div>
   );
 }

@@ -1,7 +1,13 @@
-export default function Footer() {
+type FooterProps = {
+  copyright: string;
+};
+
+export default function Footer({
+  copyright,
+}: FooterProps) {
   return (
-    <footer className="border-t border-gray-800 py-8 text-center text-gray-500">
-      © 2026 ForgeAI. All rights reserved.
+    <footer className="border-t border-white/10 py-10 text-center text-gray-500">
+      {copyright}
     </footer>
   );
 }
