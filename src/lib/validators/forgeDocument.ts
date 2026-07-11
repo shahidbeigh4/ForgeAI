@@ -6,27 +6,25 @@ export const HeroPropsSchema = z.object({
   buttonText: z.string(),
 });
 
-export const AISectionSchema = z.discriminatedUnion("type", [
-  z.object({
-    type: z.literal("hero"),
-    props: HeroPropsSchema,
-  }),
+export const FeaturesPropsSchema = z.object({
+  heading: z.string(),
+  items: z.array(
+    z.object({
+      title: z.string(),
+      description: z.string(),
+    })
+  ),
+});
 
-  z.object({
-    type: z.literal("features"),
-    props: z.record(z.string(), z.unknown()).default({}),
-  }),
+export const ContactPropsSchema = z.object({
+  heading: z.string(),
+  subtitle: z.string(),
+  buttonText: z.string(),
+});
 
-  z.object({
-    type: z.literal("contact"),
-    props: z.record(z.string(), z.unknown()).default({}),
-  }),
-
-  z.object({
-    type: z.literal("footer"),
-    props: z.record(z.string(), z.unknown()).default({}),
-  }),
-]);
+export const FooterPropsSchema = z.object({
+  copyright: z.string(),
+});
 
 export const AIDocumentSchema = z.object({
   name: z.string(),
@@ -46,5 +44,27 @@ export const AIDocumentSchema = z.object({
     "dark",
   ]),
 
-  sections: z.array(AISectionSchema),
+  sections: z.array(
+    z.discriminatedUnion("type", [
+      z.object({
+        type: z.literal("hero"),
+        props: HeroPropsSchema,
+      }),
+
+      z.object({
+        type: z.literal("features"),
+        props: FeaturesPropsSchema,
+      }),
+
+      z.object({
+        type: z.literal("contact"),
+        props: ContactPropsSchema,
+      }),
+
+      z.object({
+        type: z.literal("footer"),
+        props: FooterPropsSchema,
+      }),
+    ])
+  ),
 });

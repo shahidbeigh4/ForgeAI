@@ -1,30 +1,44 @@
 import {
+  HeroProps,
+  FeaturesProps,
+  ContactProps,
+  FooterProps,
+} from "./website";
+
+import {
   BusinessType,
   ThemeType,
 } from "./document";
-
-import { HeroProps } from "./website";
 
 export interface AIHeroSection {
   type: "hero";
   props: HeroProps;
 }
 
-export interface AIGenericSection {
-  type: "features" | "contact" | "footer";
-  props: Record<string, unknown>;
+export interface AIFeaturesSection {
+  type: "features";
+  props: FeaturesProps;
+}
+
+export interface AIContactSection {
+  type: "contact";
+  props: ContactProps;
+}
+
+export interface AIFooterSection {
+  type: "footer";
+  props: FooterProps;
 }
 
 export type AISection =
   | AIHeroSection
-  | AIGenericSection;
+  | AIFeaturesSection
+  | AIContactSection
+  | AIFooterSection;
 
 export interface AIDocument {
   name: string;
-
   business: BusinessType;
-
   theme: ThemeType;
-
   sections: AISection[];
 }

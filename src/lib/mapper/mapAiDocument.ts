@@ -1,35 +1,41 @@
 import { AIDocument } from "@/engine/schema/ai";
-import {
-  ForgeDocument,
-} from "@/engine/schema/document";
-
-import {
-  WebsiteSection,
-} from "@/engine/schema/website";
+import { ForgeDocument } from "@/engine/schema/document";
+import { WebsiteSection } from "@/engine/schema/website";
 
 export function mapAiDocument(
   ai: AIDocument
 ): ForgeDocument {
 
   const sections: WebsiteSection[] = ai.sections.map((section) => {
+    switch (section.type) {
+      case "hero":
+        return {
+          id: crypto.randomUUID(),
+          type: "hero",
+          props: section.props,
+        };
 
-    if (section.type === "hero") {
-      return {
-        id: crypto.randomUUID(),
-        type: "hero",
-        props: {
-          title: section.props.title,
-          subtitle: section.props.subtitle,
-          buttonText: section.props.buttonText,
-        },
-      };
+      case "features":
+        return {
+          id: crypto.randomUUID(),
+          type: "features",
+          props: section.props,
+        };
+
+      case "contact":
+        return {
+          id: crypto.randomUUID(),
+          type: "contact",
+          props: section.props,
+        };
+
+      case "footer":
+        return {
+          id: crypto.randomUUID(),
+          type: "footer",
+          props: section.props,
+        };
     }
-
-    return {
-      id: crypto.randomUUID(),
-      type: section.type,
-      props: section.props,
-    };
   });
 
   return {
