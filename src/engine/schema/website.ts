@@ -1,16 +1,3 @@
-export type BusinessType =
-  | "education"
-  | "hotel"
-  | "restaurant"
-  | "portfolio"
-  | "startup";
-
-export type ThemeType =
-  | "modern"
-  | "minimal"
-  | "luxury"
-  | "dark";
-
 export type SectionType =
   | "hero"
   | "features"
@@ -33,11 +20,11 @@ export interface HeroSection extends BaseSection {
   props: HeroProps;
 }
 
-export interface EmptySection extends BaseSection {
+export interface GenericSection extends BaseSection {
   type: "features" | "contact" | "footer";
-  props: {};
+  props: Record<string, unknown>;
 }
 
 export type WebsiteSection =
   | HeroSection
-  | EmptySection;
+  | GenericSection;

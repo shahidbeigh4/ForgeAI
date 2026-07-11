@@ -1,8 +1,17 @@
-import {
-  BusinessType,
-  ThemeType,
-  WebsiteSection,
-} from "./website";
+import { WebsiteSection } from "./website";
+
+export type BusinessType =
+  | "education"
+  | "hotel"
+  | "restaurant"
+  | "portfolio"
+  | "startup";
+
+export type ThemeType =
+  | "modern"
+  | "minimal"
+  | "luxury"
+  | "dark";
 
 export interface ForgeDocument {
   id: string;
